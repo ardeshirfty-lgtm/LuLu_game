@@ -1,9 +1,11 @@
 {
   "$GMObject":"",
-  "%Name":"Obj_Fire",
-  "eventList":[],
+  "%Name":"Obj_Net",
+  "eventList":[
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+  ],
   "managed":true,
-  "name":"Obj_Fire",
+  "name":"Obj_Net",
   "overriddenProperties":[],
   "parent":{
     "name":"LuLu_game",

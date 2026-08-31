@@ -1,5 +1,7 @@
 gravity = 0
 
+depth = 1
+
 health = 50
 
 gravity_direction = 270

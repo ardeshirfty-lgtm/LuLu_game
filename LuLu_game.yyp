@@ -20,8 +20,8 @@
   "name":"LuLu_game",
   "resources":[
     {"id":{"name":"Obj_Enemy","path":"objects/Obj_Enemy/Obj_Enemy.yy",},},
-    {"id":{"name":"Obj_Fire","path":"objects/Obj_Fire/Obj_Fire.yy",},},
     {"id":{"name":"Obj_Ground","path":"objects/Obj_Ground/Obj_Ground.yy",},},
+    {"id":{"name":"Obj_Net","path":"objects/Obj_Net/Obj_Net.yy",},},
     {"id":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},},
     {"id":{"name":"Obj_projectile","path":"objects/Obj_projectile/Obj_projectile.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},

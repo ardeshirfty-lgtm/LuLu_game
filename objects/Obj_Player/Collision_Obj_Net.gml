@@ -1,4 +1,4 @@
-
+/*
 var dir = point_direction(x, y, other.x, other.y);
 
 x += lengthdir_x(20, dir);
@@ -13,7 +13,16 @@ if (!invincible)
     // 2 ثانیه ضدضربه
     invincible = true;
     invincible_time = room_speed * 2;
+    
 }
+*/
+timer += 1
+
+x = other.x 
+y= other.y
+vspeed = 0
+hspeed = 0 
+
 
  if (!burning)
 {
