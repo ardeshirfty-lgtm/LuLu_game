@@ -17,7 +17,7 @@ else
 }
 
 // Step Event - Obj_Player
-if moving = true {
+if (moving == true && !net_trapped) {
     
     
 
@@ -94,16 +94,25 @@ if (sprite_index == Player_eating)
 
 
 // انیمیشن سوختن
+
 if (net_trapped)
 {
-    net_timer--;
+    net_timer-=1;
 
     if (net_timer <= 0)
     {
         net_trapped = false;
+
         sprite_index = SP_Player;
         image_index = 0;
         image_speed = 1;
+
+        // بیرون آمدن از تور
+        x += lengthdir_x(40, net_exit_direction);
+        y += lengthdir_y(40, net_exit_direction);
+
+        // حرکت دوباره فعال شود
+        moving = true;
     }
 }
 

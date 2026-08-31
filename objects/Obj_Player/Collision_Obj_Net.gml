@@ -3,10 +3,15 @@ if (!net_trapped && net_cooldown <= 0)
 {
     // گیر افتادن در تور
     net_trapped = true;
-    net_timer = room_speed * 1;
 
-    // جلوگیری از گیر کردن دوباره
+    // مدت گیر افتادن
+    net_timer = room_speed * 1.5;
+
+    // مدت زمان جلوگیری از گیر افتادن دوباره
     net_cooldown = room_speed * 2;
+
+    // جهت خروج از تور
+    net_exit_direction = point_direction(other.x, other.y, xprevious, yprevious);
 
     // توقف حرکت
     moving = false;
@@ -14,11 +19,11 @@ if (!net_trapped && net_cooldown <= 0)
     vspeed = 0;
     speed = 0;
 
-    // قرار گرفتن روی تور
+    // قرار گرفتن داخل تور
     x = other.x;
     y = other.y;
 
-    // انیمیشن گیر افتادن
+    // انیمیشن
     sprite_index = Sp_burning;
     image_index = 0;
     image_speed = 1;
@@ -28,7 +33,6 @@ if (!net_trapped && net_cooldown <= 0)
     {
         health -= 1;
 
-        // 2 ثانیه ضدضربه
         invincible = true;
         invincible_time = room_speed * 2;
     }
