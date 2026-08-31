@@ -25,7 +25,6 @@
     {"id":{"name":"Obj_Player","path":"objects/Obj_Player/Obj_Player.yy",},},
     {"id":{"name":"Obj_projectile","path":"objects/Obj_projectile/Obj_projectile.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
-    {"id":{"name":"eating_effect","path":"sprites/eating_effect/eating_effect.yy",},},
     {"id":{"name":"Enemy_Sprite3","path":"sprites/Enemy_Sprite3/Enemy_Sprite3.yy",},},
     {"id":{"name":"Player_eating","path":"sprites/Player_eating/Player_eating.yy",},},
     {"id":{"name":"Sp_burning","path":"sprites/Sp_burning/Sp_burning.yy",},},

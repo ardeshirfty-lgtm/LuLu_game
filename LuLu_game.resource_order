@@ -6,7 +6,6 @@
     {"name":"Obj_Net","order":13,"path":"objects/Obj_Net/Obj_Net.yy",},
     {"name":"Obj_Player","order":1,"path":"objects/Obj_Player/Obj_Player.yy",},
     {"name":"Obj_projectile","order":9,"path":"objects/Obj_projectile/Obj_projectile.yy",},
-    {"name":"eating_effect","order":11,"path":"sprites/eating_effect/eating_effect.yy",},
     {"name":"Enemy_Sprite3","order":5,"path":"sprites/Enemy_Sprite3/Enemy_Sprite3.yy",},
     {"name":"Player_eating","order":7,"path":"sprites/Player_eating/Player_eating.yy",},
     {"name":"Sp_burning","order":14,"path":"sprites/Sp_burning/Sp_burning.yy",},

@@ -16,15 +16,29 @@ if (!invincible)
     
 }
 */
-timer += 1
-
-moving = false 
 
 
+/*
  if (!burning)
 {
     burning = true;
     sprite_index = Sp_burning;
     image_index = 0;
     image_speed = 0.2;
+}
+ * /*/
+timer +=1
+if (!net_trapped)
+{
+    net_trapped = true;
+    net_timer = room_speed * 1;
+
+    moving = false;
+    sprite_index = Sp_burning;
+    image_index = 0;
+    image_speed = 1;
+    x = other.x
+}
+else {
+	 if timer = 30 { motion_add(45 , 5 )  }
 }

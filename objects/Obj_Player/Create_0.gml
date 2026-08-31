@@ -28,3 +28,5 @@ invincible = false;
 invincible_time = 0;
 
 burning = false;
+net_trapped = false;
+net_timer = 0;

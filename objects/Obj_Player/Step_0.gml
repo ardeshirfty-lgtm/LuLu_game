@@ -87,17 +87,17 @@ if (sprite_index == Player_eating)
 
 
 // انیمیشن سوختن
-if (burning)
+if (net_trapped)
 {
-    if (image_index >= image_number - 1)
+    net_timer--;
+
+    if (net_timer <= 0)
     {
-        
-        burning = false;
+        net_trapped = false;
         sprite_index = SP_Player;
         image_index = 0;
         image_speed = 1;
     }
 }
-
 
 
