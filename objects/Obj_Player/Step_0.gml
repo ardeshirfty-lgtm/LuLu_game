@@ -1,3 +1,10 @@
+
+// Net cooldown
+if (net_cooldown > 0)
+{
+    net_cooldown--;
+}
+
 if (mouse_check_button(mb_left))
 {
     // تا وقتی موس نگه داشته شده، به سمت موس حرکت کن
