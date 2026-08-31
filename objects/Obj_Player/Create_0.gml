@@ -1,6 +1,6 @@
 gravity = 0
 
-depth = 1
+depth = 0
 
 health = 50
 

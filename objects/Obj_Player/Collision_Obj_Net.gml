@@ -18,10 +18,7 @@ if (!invincible)
 */
 timer += 1
 
-x = other.x 
-y= other.y
-vspeed = 0
-hspeed = 0 
+moving = false 
 
 
  if (!burning)
