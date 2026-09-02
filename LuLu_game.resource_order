@@ -1,6 +1,7 @@
 {
   "FolderOrderSettings":[],
   "ResourceOrderSettings":[
+    {"name":"Obj_Ball","order":16,"path":"objects/Obj_Ball/Obj_Ball.yy",},
     {"name":"Obj_Enemy","order":6,"path":"objects/Obj_Enemy/Obj_Enemy.yy",},
     {"name":"Obj_Ground","order":4,"path":"objects/Obj_Ground/Obj_Ground.yy",},
     {"name":"Obj_Net","order":13,"path":"objects/Obj_Net/Obj_Net.yy",},
@@ -8,6 +9,7 @@
     {"name":"Obj_projectile","order":9,"path":"objects/Obj_projectile/Obj_projectile.yy",},
     {"name":"Enemy_Sprite3","order":5,"path":"sprites/Enemy_Sprite3/Enemy_Sprite3.yy",},
     {"name":"Player_eating","order":7,"path":"sprites/Player_eating/Player_eating.yy",},
+    {"name":"Sp_ball","order":15,"path":"sprites/Sp_ball/Sp_ball.yy",},
     {"name":"Sp_burning","order":14,"path":"sprites/Sp_burning/Sp_burning.yy",},
     {"name":"SP_Fire","order":12,"path":"sprites/SP_Fire/SP_Fire.yy",},
     {"name":"SP_ground","order":3,"path":"sprites/SP_ground/SP_ground.yy",},

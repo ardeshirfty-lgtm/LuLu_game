@@ -19,6 +19,7 @@
   },
   "name":"LuLu_game",
   "resources":[
+    {"id":{"name":"Obj_Ball","path":"objects/Obj_Ball/Obj_Ball.yy",},},
     {"id":{"name":"Obj_Enemy","path":"objects/Obj_Enemy/Obj_Enemy.yy",},},
     {"id":{"name":"Obj_Ground","path":"objects/Obj_Ground/Obj_Ground.yy",},},
     {"id":{"name":"Obj_Net","path":"objects/Obj_Net/Obj_Net.yy",},},
@@ -27,6 +28,7 @@
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"Enemy_Sprite3","path":"sprites/Enemy_Sprite3/Enemy_Sprite3.yy",},},
     {"id":{"name":"Player_eating","path":"sprites/Player_eating/Player_eating.yy",},},
+    {"id":{"name":"Sp_ball","path":"sprites/Sp_ball/Sp_ball.yy",},},
     {"id":{"name":"Sp_burning","path":"sprites/Sp_burning/Sp_burning.yy",},},
     {"id":{"name":"SP_Fire","path":"sprites/SP_Fire/SP_Fire.yy",},},
     {"id":{"name":"SP_ground","path":"sprites/SP_ground/SP_ground.yy",},},
