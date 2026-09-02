@@ -89,31 +89,42 @@ if (sprite_index == Player_eating)
     }
 
 
+if (sprite_index == Sp_burning)
+{
+    if (invincible == false)
+    {
+        sprite_index = SP_Player;
+        image_index = 0;
+        image_speed = 1;
+    }
+}
 
-/// burning Animation===================================
 
-
-// انیمیشن سوختن
-
+// Net Trap
 if (net_trapped)
 {
-    net_timer-=1;
+    net_timer--;
 
     if (net_timer <= 0)
     {
+        // آزاد شدن از تور
         net_trapped = false;
 
         sprite_index = SP_Player;
         image_index = 0;
         image_speed = 1;
 
-        // بیرون آمدن از تور
-        x += lengthdir_x(40, net_exit_direction);
-        y += lengthdir_y(40, net_exit_direction);
-
-        // حرکت دوباره فعال شود
-        moving = true;
+        // یک ثانیه تور دوباره روی Player اثر نگذارد
+        net_cooldown = room_speed * 1;
     }
 }
+
+// کم شدن Cooldown ت
+/*ور
+if (net_cooldown > 0)
+{
+    net_cooldown-= 1;
+}
+
 
 

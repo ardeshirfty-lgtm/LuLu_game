@@ -33,4 +33,6 @@ burning = false;
 net_trapped = false;
 net_timer = 0;
 net_cooldown = 0;
-net_exit_direction = 0;
+
+
+
