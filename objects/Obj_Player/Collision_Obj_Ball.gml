@@ -1,3 +1,4 @@
+
 // Push the ball using the Player's current movement velocity.
 // No Room Physics / Physics World is required.
 
@@ -16,17 +17,23 @@ if (instance_exists(other))
     }
 
     // Push strength.
-    var push_strength = 0.85;
+    var push_strength = 0.1;
 
     other.hspeed += push_x * push_strength;
     other.vspeed += push_y * push_strength;
 
     // Prevent the ball from getting pushed beyond its own max speed.
     var ball_speed = point_distance(0, 0, other.hspeed, other.vspeed);
-    if (ball_speed > other.ball_max_speed)
-    {
-        var ball_dir = point_direction(0, 0, other.hspeed, other.vspeed);
-        other.hspeed = lengthdir_x(other.ball_max_speed, ball_dir);
-        other.vspeed = lengthdir_y(other.ball_max_speed, ball_dir);
-    }
+  if (ball_speed > other.speed)
+{
+    var ball_dir = point_direction(0, 0, other.hspeed, other.vspeed);
+
+    var max_ball_speed = 2;
+
+    other.hspeed = lengthdir_x(max_ball_speed, ball_dir);
+    other.vspeed = lengthdir_y(max_ball_speed, ball_dir);
 }
+}
+
+
+
