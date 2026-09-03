@@ -1,4 +1,4 @@
-
+/*
 if (!net_trapped && net_cooldown <= 0)
 {
     // گیر افتادن در تور

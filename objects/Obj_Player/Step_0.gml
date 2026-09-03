@@ -118,13 +118,3 @@ if (net_trapped)
         net_cooldown = room_speed * 1;
     }
 }
-
-// کم شدن Cooldown ت
-/*ور
-if (net_cooldown > 0)
-{
-    net_cooldown-= 1;
-}
-
-
-

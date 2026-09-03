@@ -17,7 +17,7 @@ timer=0
 moving = false
 
 move_speed = 0;
-max_speed = 10;
+max_speed = 6;
 acceleration = 1;
 deceleration = 0.5;
 invincible = false;
