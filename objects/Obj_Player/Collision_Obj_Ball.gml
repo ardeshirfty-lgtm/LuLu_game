@@ -5,14 +5,12 @@
 if (instance_exists(other))
 {
     // ---------------------------------
-    // Player movement velocity
+    // Player movement
     // ---------------------------------
 
     var push_x = hspeed;
     var push_y = vspeed;
 
-
-    // If Player is moving with move_towards_point
     if (point_distance(0, 0, push_x, push_y) < 0.01 && moving)
     {
         var push_dir = point_direction(
@@ -37,51 +35,54 @@ if (instance_exists(other))
     var add_y = push_y * push_strength;
 
 
-    // ---------------------------------
-    // Check horizontal collision
-    // ---------------------------------
+    // =================================
+    // FIND BALL CONTACT
+    // =================================
 
-    if (add_x != 0)
+    var left  = place_meeting(other.x - 2, other.y, Obj_Ground);
+    var right = place_meeting(other.x + 2, other.y, Obj_Ground);
+
+    var up    = place_meeting(other.x, other.y - 2, Obj_Ground);
+    var down  = place_meeting(other.x, other.y + 2, Obj_Ground);
+
+
+    // =================================
+    // REMOVE ONLY THE PUSH THAT GOES
+    // INTO THE SURFACE
+    // =================================
+
+    if (add_x < 0 && left)
     {
-        if (place_meeting(
-            other.x + add_x,
-            other.y,
-            Obj_Ground
-        ))
-        {
-            add_x = 0;
-        }
+        add_x = 0;
+    }
+
+    if (add_x > 0 && right)
+    {
+        add_x = 0;
+    }
+
+    if (add_y < 0 && up)
+    {
+        add_y = 0;
+    }
+
+    if (add_y > 0 && down)
+    {
+        add_y = 0;
     }
 
 
-    // ---------------------------------
-    // Check vertical collision
-    // ---------------------------------
-
-    if (add_y != 0)
-    {
-        if (place_meeting(
-            other.x,
-            other.y + add_y,
-            Obj_Ground
-        ))
-        {
-            add_y = 0;
-        }
-    }
-
-
-    // ---------------------------------
-    // Apply push
-    // ---------------------------------
+    // =================================
+    // APPLY PUSH
+    // =================================
 
     other.hspeed += add_x;
     other.vspeed += add_y;
 
 
-    // ---------------------------------
-    // Maximum speed
-    // ---------------------------------
+    // =================================
+    // MAX SPEED
+    // =================================
 
     var ball_speed = point_distance(
         0,

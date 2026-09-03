@@ -11,11 +11,3 @@ invincible = false;
 invincible_time = 0;
 damage = false;
 
-
-// Ball movement
-x += hspeed;
-y += vspeed;
-
-// Friction
-hspeed *= 0.98;
-vspeed *= 0.98;
