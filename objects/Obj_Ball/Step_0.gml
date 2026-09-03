@@ -7,7 +7,7 @@ var move_y = vspeed;
 
 
 // =====================================
-// HORIZONTAL MOVEMENT
+// HORIZONTAL
 // =====================================
 
 if (move_x != 0)
@@ -16,17 +16,34 @@ if (move_x != 0)
 
     if (place_meeting(x, y, Obj_Ground))
     {
-        // برگرد به موقعیت قبل از برخورد
         x -= move_x;
 
-        // Bounce افقی
-        hspeed = -hspeed;
+        // اگر از چپ به دیوار خورده
+        if (move_x > 0)
+        {
+            while (place_meeting(x + 1, y, Obj_Ground))
+            {
+                x -= 1;
+            }
+        }
+
+        // اگر از راست به دیوار خورده
+        else
+        {
+            while (place_meeting(x - 1, y, Obj_Ground))
+            {
+                x += 1;
+            }
+        }
+
+        // Bounce
+        hspeed = -abs(hspeed) * sign(move_x);
     }
 }
 
 
 // =====================================
-// VERTICAL MOVEMENT
+// VERTICAL
 // =====================================
 
 if (move_y != 0)
@@ -35,12 +52,55 @@ if (move_y != 0)
 
     if (place_meeting(x, y, Obj_Ground))
     {
-        // برگرد به موقعیت قبل از برخورد
         y -= move_y;
 
-        // Bounce عمودی
-        vspeed = -vspeed;
+        // از بالا به Ground
+        if (move_y > 0)
+        {
+            while (place_meeting(x, y + 1, Obj_Ground))
+            {
+                y -= 1;
+            }
+        }
+
+        // از پایین به سقف
+        else
+        {
+            while (place_meeting(x, y - 1, Obj_Ground))
+            {
+                y += 1;
+            }
+        }
+
+        // Bounce
+        vspeed = -abs(vspeed) * sign(move_y);
     }
+}
+
+
+// =====================================
+// IMPORTANT:
+// PREVENT VELOCITY INTO GROUND
+// =====================================
+
+if (place_meeting(x + 1, y, Obj_Ground) && hspeed > 0)
+{
+    hspeed = 0;
+}
+
+if (place_meeting(x - 1, y, Obj_Ground) && hspeed < 0)
+{
+    hspeed = 0;
+}
+
+if (place_meeting(x, y + 1, Obj_Ground) && vspeed > 0)
+{
+    vspeed = 0;
+}
+
+if (place_meeting(x, y - 1, Obj_Ground) && vspeed < 0)
+{
+    vspeed = 0;
 }
 
 
