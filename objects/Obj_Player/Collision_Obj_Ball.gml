@@ -5,11 +5,12 @@
 if (instance_exists(other))
 {
     // ---------------------------------
-    // Player movement
+    // PLAYER MOVEMENT
     // ---------------------------------
 
     var push_x = hspeed;
     var push_y = vspeed;
+
 
     if (point_distance(0, 0, push_x, push_y) < 0.01 && moving)
     {
@@ -26,90 +27,41 @@ if (instance_exists(other))
 
 
     // ---------------------------------
-    // Push strength
+    // PUSH STRENGTH
     // ---------------------------------
 
     var push_strength = 0.1;
 
-    var add_x = push_x * push_strength;
-    var add_y = push_y * push_strength;
+    other.pending_push_x += push_x * push_strength;
+    other.pending_push_y += push_y * push_strength;
 
 
-    // =================================
-    // FIND BALL CONTACT
-    // =================================
+    // ---------------------------------
+    // LIMIT PENDING PUSH
+    // ---------------------------------
 
-    var left  = place_meeting(other.x - 2, other.y, Obj_Ground);
-    var right = place_meeting(other.x + 2, other.y, Obj_Ground);
-
-    var up    = place_meeting(other.x, other.y - 2, Obj_Ground);
-    var down  = place_meeting(other.x, other.y + 2, Obj_Ground);
-
-
-    // =================================
-    // REMOVE ONLY THE PUSH THAT GOES
-    // INTO THE SURFACE
-    // =================================
-
-    if (add_x < 0 && left)
-    {
-        add_x = 0;
-    }
-
-    if (add_x > 0 && right)
-    {
-        add_x = 0;
-    }
-
-    if (add_y < 0 && up)
-    {
-        add_y = 0;
-    }
-
-    if (add_y > 0 && down)
-    {
-        add_y = 0;
-    }
-
-
-    // =================================
-    // APPLY PUSH
-    // =================================
-
-    other.hspeed += add_x;
-    other.vspeed += add_y;
-
-
-    // =================================
-    // MAX SPEED
-    // =================================
-
-    var ball_speed = point_distance(
+    var push_speed = point_distance(
         0,
         0,
-        other.hspeed,
-        other.vspeed
+        other.pending_push_x,
+        other.pending_push_y
     );
 
-    var max_ball_speed = 8;
+    var max_push = 2;
 
-    if (ball_speed > max_ball_speed)
+    if (push_speed > max_push)
     {
-        var ball_dir = point_direction(
+        var push_angle = point_direction(
             0,
             0,
-            other.hspeed,
-            other.vspeed
+            other.pending_push_x,
+            other.pending_push_y
         );
 
-        other.hspeed = lengthdir_x(
-            max_ball_speed,
-            ball_dir
-        );
+        other.pending_push_x =
+            lengthdir_x(max_push, push_angle);
 
-        other.vspeed = lengthdir_y(
-            max_ball_speed,
-            ball_dir
-        );
+        other.pending_push_y =
+            lengthdir_y(max_push, push_angle);
     }
 }

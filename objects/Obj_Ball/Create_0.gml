@@ -1,13 +1,25 @@
+// =====================================
+// BALL PHYSICS
+// =====================================
 
-ball_max_speed = 18;
+hspeed = 0;
+vspeed = 0;
 
-bounce = false;
-bounce_timer = 0;
-bounce_power = 0.7;
+ball_max_speed = 8;
+friction = 0.98;
 
+// Push received from Player.
+// Player فقط این‌ها را تغییر می‌دهد.
+pending_push_x = 0;
+pending_push_y = 0;
+
+
+// =====================================
+// DAMAGE
+// =====================================
 
 health = 50;
+
+damage = false;
 invincible = false;
 invincible_time = 0;
-damage = false;
-
