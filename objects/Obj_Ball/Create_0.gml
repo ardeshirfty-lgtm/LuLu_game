@@ -1,14 +1,10 @@
 // =====================================
-// BALL PHYSICS - NO GRAVITY
+// BALL PHYSICS WORLD
 // =====================================
 
+// Physics World now controls movement, bounce and momentum transfer.
+// Keep this gameplay value for future speed tuning if needed.
 ball_max_speed = 8;
-ball_bounce = 0.8;
-
-hspeed = 0;
-vspeed = 0;
-pending_push_x = 0;
-pending_push_y = 0;
 
 // =====================================
 // DAMAGE
