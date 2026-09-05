@@ -1,5 +1,5 @@
 // =====================================
-// BALL MOVEMENT
+// BALL MOVEMENT - NO GRAVITY
 // =====================================
 
 // Apply the push collected by Obj_Player collision.
@@ -8,8 +8,7 @@ vspeed += pending_push_y;
 pending_push_x = 0;
 pending_push_y = 0;
 
-// Simple gravity.
-vspeed += ball_gravity;
+// No gravity. The ball only moves from its current velocity / pushes.
 
 // Limit velocity.
 var ball_speed = point_distance(0, 0, hspeed, vspeed);
@@ -67,12 +66,7 @@ for (var j = 0; j < steps_y; j++)
 }
 
 if (hit_y)
-{
     vspeed = -vspeed * ball_bounce;
-
-    if (abs(vspeed) < 0.35)
-        vspeed = 0;
-}
 
 // =====================================
 // ENEMY DAMAGE
