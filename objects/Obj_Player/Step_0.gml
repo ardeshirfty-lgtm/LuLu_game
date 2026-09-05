@@ -1,5 +1,5 @@
 // =====================================
-// PLAYER MOVEMENT
+// PLAYER MOVEMENT - FLOATY / JETPACK
 // =====================================
 
 if (mouse_check_button(mb_left))
@@ -7,51 +7,50 @@ if (mouse_check_button(mb_left))
     target_x = mouse_x;
     target_y = mouse_y;
     moving = true;
-    move_speed = min(move_speed + acceleration, max_speed);
+
+    var target_dir = point_direction(x, y, target_x, target_y);
+    var desired_x = lengthdir_x(max_speed, target_dir);
+    var desired_y = lengthdir_y(max_speed, target_dir);
+
+    // Smoothly accelerate toward the mouse instead of snapping velocity.
+    hspeed = approach(hspeed, desired_x, acceleration);
+    vspeed = approach(vspeed, desired_y, acceleration);
 }
 else
 {
-    move_speed = max(move_speed - deceleration, 0);
-
-    if (move_speed <= 0)
-        moving = false;
+    // Release the mouse = keep drifting, then slowly lose momentum.
+    moving = false;
+    hspeed = approach(hspeed, 0, deceleration);
+    vspeed = approach(vspeed, 0, deceleration);
 }
 
-if (moving && point_distance(x, y, target_x, target_y) > 2)
+move_speed = point_distance(0, 0, hspeed, vspeed);
+
+// Move horizontally. If we hit a surface, remove only the blocked axis.
+var old_x = x;
+x += hspeed;
+
+if (place_meeting(x, y, Obj_Ground))
 {
-    var move_dir = point_direction(x, y, target_x, target_y);
-
-    hspeed = lengthdir_x(move_speed, move_dir);
-    vspeed = lengthdir_y(move_speed, move_dir);
-
-    // Move horizontally and stop cleanly at the ground/walls.
-    var old_x = x;
-    x += hspeed;
-
-    if (place_meeting(x, y, Obj_Ground))
-    {
-        x = old_x;
-        hspeed = 0;
-    }
-
-    // Move vertically and stop cleanly at the ground/walls.
-    var old_y = y;
-    y += vspeed;
-
-    if (place_meeting(x, y, Obj_Ground))
-    {
-        y = old_y;
-        vspeed = 0;
-    }
-}
-else
-{
+    x = old_x;
     hspeed = 0;
-    vspeed = 0;
-
-    if (point_distance(x, y, target_x, target_y) <= 2)
-        moving = false;
 }
+
+// Move vertically. This lets the player slide along walls/floors.
+var old_y = y;
+y += vspeed;
+
+if (place_meeting(x, y, Obj_Ground))
+{
+    y = old_y;
+    vspeed = 0;
+}
+
+// Stop tiny residual drift.
+if (abs(hspeed) < 0.02) hspeed = 0;
+if (abs(vspeed) < 0.02) vspeed = 0;
+
+move_speed = point_distance(0, 0, hspeed, vspeed);
 
 // Face the mouse.
 if (mouse_x < x)
@@ -59,7 +58,9 @@ if (mouse_x < x)
 else if (mouse_x > x)
     image_xscale = 1;
 
-// Keep the health / animation / net logic below this point.
+// =====================================
+// ANIMATION / NET LOGIC
+// =====================================
 
 if (sprite_index == Player_eating)
 {
