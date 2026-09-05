@@ -12,7 +12,7 @@ if (mouse_check_button(mb_left))
     var desired_x = lengthdir_x(max_speed, target_dir);
     var desired_y = lengthdir_y(max_speed, target_dir);
 
-    // Smoothly accelerate toward the mouse instead of snapping velocity.
+    // Accelerate toward the mouse direction.
     if (hspeed < desired_x)
         hspeed = min(hspeed + acceleration, desired_x);
     else
