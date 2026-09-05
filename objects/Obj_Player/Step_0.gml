@@ -13,15 +13,30 @@ if (mouse_check_button(mb_left))
     var desired_y = lengthdir_y(max_speed, target_dir);
 
     // Smoothly accelerate toward the mouse instead of snapping velocity.
-    hspeed = approach(hspeed, desired_x, acceleration);
-    vspeed = approach(vspeed, desired_y, acceleration);
+    if (hspeed < desired_x)
+        hspeed = min(hspeed + acceleration, desired_x);
+    else
+        hspeed = max(hspeed - acceleration, desired_x);
+
+    if (vspeed < desired_y)
+        vspeed = min(vspeed + acceleration, desired_y);
+    else
+        vspeed = max(vspeed - acceleration, desired_y);
 }
 else
 {
     // Release the mouse = keep drifting, then slowly lose momentum.
     moving = false;
-    hspeed = approach(hspeed, 0, deceleration);
-    vspeed = approach(vspeed, 0, deceleration);
+
+    if (hspeed > 0)
+        hspeed = max(hspeed - deceleration, 0);
+    else
+        hspeed = min(hspeed + deceleration, 0);
+
+    if (vspeed > 0)
+        vspeed = max(vspeed - deceleration, 0);
+    else
+        vspeed = min(vspeed + deceleration, 0);
 }
 
 move_speed = point_distance(0, 0, hspeed, vspeed);
