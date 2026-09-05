@@ -1,6 +1,9 @@
 // =====================================
-// PLAYER MOVEMENT - FLOATY / JETPACK
+// PLAYER MOVEMENT - PHYSICS WORLD
 // =====================================
+
+var vx = physics_get_linear_velocity_x(id);
+var vy = physics_get_linear_velocity_y(id);
 
 if (mouse_check_button(mb_left))
 {
@@ -12,60 +15,27 @@ if (mouse_check_button(mb_left))
     var desired_x = lengthdir_x(max_speed, target_dir);
     var desired_y = lengthdir_y(max_speed, target_dir);
 
-    // Accelerate toward the mouse direction.
-    if (hspeed < desired_x)
-        hspeed = min(hspeed + acceleration, desired_x);
-    else
-        hspeed = max(hspeed - acceleration, desired_x);
-
-    if (vspeed < desired_y)
-        vspeed = min(vspeed + acceleration, desired_y);
-    else
-        vspeed = max(vspeed - acceleration, desired_y);
+    // Smoothly accelerate toward the mouse direction.
+    vx = approach(vx, desired_x, acceleration);
+    vy = approach(vy, desired_y, acceleration);
 }
 else
 {
     // Release the mouse = keep drifting, then slowly lose momentum.
     moving = false;
 
-    if (hspeed > 0)
-        hspeed = max(hspeed - deceleration, 0);
-    else
-        hspeed = min(hspeed + deceleration, 0);
-
-    if (vspeed > 0)
-        vspeed = max(vspeed - deceleration, 0);
-    else
-        vspeed = min(vspeed + deceleration, 0);
+    vx = approach(vx, 0, deceleration);
+    vy = approach(vy, 0, deceleration);
 }
 
-move_speed = point_distance(0, 0, hspeed, vspeed);
+// Physics World handles collision resolution with the ground.
+physics_set_linear_velocity(id, vx, vy);
 
-// Move horizontally. If we hit a surface, remove only the blocked axis.
-var old_x = x;
-x += hspeed;
-
-if (place_meeting(x, y, Obj_Ground))
-{
-    x = old_x;
-    hspeed = 0;
-}
-
-// Move vertically. This lets the player slide along walls/floors.
-var old_y = y;
-y += vspeed;
-
-if (place_meeting(x, y, Obj_Ground))
-{
-    y = old_y;
-    vspeed = 0;
-}
+move_speed = point_distance(0, 0, vx, vy);
 
 // Stop tiny residual drift.
-if (abs(hspeed) < 0.02) hspeed = 0;
-if (abs(vspeed) < 0.02) vspeed = 0;
-
-move_speed = point_distance(0, 0, hspeed, vspeed);
+if (abs(vx) < 0.02 && abs(vy) < 0.02)
+    physics_set_linear_velocity(id, 0, 0);
 
 // Face the mouse.
 if (mouse_x < x)
@@ -108,4 +78,13 @@ if (net_trapped)
         image_speed = 1;
         net_cooldown = room_speed;
     }
+}
+
+// Helper for smooth velocity changes.
+function approach(current, target, amount)
+{
+    if (current < target)
+        return min(current + amount, target);
+    else
+        return max(current - amount, target);
 }
