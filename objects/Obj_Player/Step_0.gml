@@ -1,46 +1,31 @@
 
-// Net cooldown
-if (net_cooldown > 0)
-{
-    net_cooldown--;
-}
-
 if (mouse_check_button(mb_left))
 {
-    // تا وقتی موس نگه داشته شده، به سمت موس حرکت کن
     move_towards_point(mouse_x, mouse_y, move_speed);
 }
 else
 {
-    // وقتی موس ول شد، شارژ خالی شود
-    move_speed = 0
+    move_speed = 0;
 }
 
 // Step Event - Obj_Player
-if (moving == true && !net_trapped) {
-    
-    
 
+{
+    move_towards_point(mouse_x, mouse_y, move_speed);
 
-   move_towards_point(target_x , target_y, move_speed);
-    
-//if  vspeed !=0 hspeed!= 0 xprevious > x  {vspeed+= 2  hspeed+=2}
-    move_speed = max( move_speed - friction , 0)
-   
-    
-    // اگر مستقیم جلو آزاد نیست
-    if (place_meeting( x + hspeed, y, Obj_Ground))
+    move_speed = max(move_speed - friction, 0);
+
+    if (place_meeting(x + hspeed, y, Obj_Ground))
     {
         hspeed = 0;
     }
-    
+
     if (place_meeting(x, y + vspeed, Obj_Ground))
     {
         vspeed = 0;
     }
-    
-    // رسیدن به مقصد
-    if (point_distance(x, y, target_x, target_y) < 5)
+
+    if (point_distance(x, y, mouse_x, mouse_y) < 5)
     {
         moving = false;
         speed = 0;
@@ -48,12 +33,11 @@ if (moving == true && !net_trapped) {
 }
 
 
-if burning = false {
 
      if mouse_x < x  {image_xscale = -1; }
      if mouse_x > x  {image_xscale = 1;  }
-}
 
+/*
 if (invincible)
 {
     invincible_time -= 1;
@@ -71,7 +55,7 @@ if (invincible)
 
 
 
-if keyboard_check(vk_nokey) {friction = 0.2; moving = false;}
+//if keyboard_check(vk_nokey) {friction = 0.2; moving = false;}
 
  
 

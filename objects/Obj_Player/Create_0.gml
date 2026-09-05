@@ -24,15 +24,10 @@ invincible = false;
 invincible_time = 0;
 blink_timer = 0;
 
-invincible = false;
-invincible_time = 0;
 
 
 
-burning = false;
-net_trapped = false;
-net_timer = 0;
-net_cooldown = 0;
+;
 
 
 

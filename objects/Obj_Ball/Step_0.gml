@@ -1,55 +1,21 @@
-// =====================================
-// BALL MOVEMENT
-// =====================================
-
-var move_x = hspeed;
-var move_y = vspeed;
 
 
 // =====================================
-// HORIZONTAL MOVEMENT
+// BALL PHYSICS
 // =====================================
 
-if (move_x != 0)
-{
-    x += move_x;
+var fix = physics_fixture_create();
 
-    if (place_meeting(x, y, Obj_Ground))
-    {
-        // برگرد به موقعیت قبل از برخورد
-        x -= move_x;
+physics_fixture_set_circle_shape(fix, sprite_width / 2);
 
-        // Bounce افقی
-        hspeed = -hspeed;
-    }
-}
+physics_fixture_set_density(fix, 1);
+physics_fixture_set_friction(fix, 0.1);
+physics_fixture_set_restitution(fix, 0.9);
+physics_fixture_set_linear_damping(fix, 0.2);
+physics_fixture_set_angular_damping(fix, 1);
 
-
-// =====================================
-// VERTICAL MOVEMENT
-// =====================================
-
-if (move_y != 0)
-{
-    y += move_y;
-
-    if (place_meeting(x, y, Obj_Ground))
-    {
-        // برگرد به موقعیت قبل از برخورد
-        y -= move_y;
-
-        // Bounce عمودی
-        vspeed = -vspeed;
-    }
-}
-
-
-// =====================================
-// FRICTION
-// =====================================
-
-hspeed *= 0.98;
-vspeed *= 0.98;
+physics_fixture_bind(fix, id);
+physics_fixture_delete(fix);
 
 
 // =====================================
