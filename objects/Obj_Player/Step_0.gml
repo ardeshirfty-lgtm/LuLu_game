@@ -16,16 +16,30 @@ if (mouse_check_button(mb_left))
     var desired_y = lengthdir_y(max_speed, target_dir);
 
     // Smoothly accelerate toward the mouse direction.
-    vx = approach(vx, desired_x, acceleration);
-    vy = approach(vy, desired_y, acceleration);
+    if (vx < desired_x)
+        vx = min(vx + acceleration, desired_x);
+    else
+        vx = max(vx - acceleration, desired_x);
+
+    if (vy < desired_y)
+        vy = min(vy + acceleration, desired_y);
+    else
+        vy = max(vy - acceleration, desired_y);
 }
 else
 {
     // Release the mouse = keep drifting, then slowly lose momentum.
     moving = false;
 
-    vx = approach(vx, 0, deceleration);
-    vy = approach(vy, 0, deceleration);
+    if (vx > 0)
+        vx = max(vx - deceleration, 0);
+    else
+        vx = min(vx + deceleration, 0);
+
+    if (vy > 0)
+        vy = max(vy - deceleration, 0);
+    else
+        vy = min(vy + deceleration, 0);
 }
 
 // Physics World handles collision resolution with the ground.
@@ -78,13 +92,4 @@ if (net_trapped)
         image_speed = 1;
         net_cooldown = room_speed;
     }
-}
-
-// Helper for smooth velocity changes.
-function approach(current, target, amount)
-{
-    if (current < target)
-        return min(current + amount, target);
-    else
-        return max(current - amount, target);
 }
