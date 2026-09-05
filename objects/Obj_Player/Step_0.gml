@@ -1,77 +1,74 @@
+// =====================================
+// PLAYER MOVEMENT
+// =====================================
 
 if (mouse_check_button(mb_left))
 {
-    move_towards_point(mouse_x, mouse_y, move_speed);
+    target_x = mouse_x;
+    target_y = mouse_y;
+    moving = true;
+    move_speed = min(move_speed + acceleration, max_speed);
 }
 else
 {
-    move_speed = 0;
+    move_speed = max(move_speed - deceleration, 0);
+
+    if (move_speed <= 0)
+        moving = false;
 }
 
-// Step Event - Obj_Player
-
+if (moving && point_distance(x, y, target_x, target_y) > 2)
 {
-    move_towards_point(mouse_x, mouse_y, move_speed);
+    var move_dir = point_direction(x, y, target_x, target_y);
 
-    move_speed = max(move_speed - friction, 0);
+    hspeed = lengthdir_x(move_speed, move_dir);
+    vspeed = lengthdir_y(move_speed, move_dir);
 
-    if (place_meeting(x + hspeed, y, Obj_Ground))
+    // Move horizontally and stop cleanly at the ground/walls.
+    var old_x = x;
+    x += hspeed;
+
+    if (place_meeting(x, y, Obj_Ground))
     {
+        x = old_x;
         hspeed = 0;
     }
 
-    if (place_meeting(x, y + vspeed, Obj_Ground))
+    // Move vertically and stop cleanly at the ground/walls.
+    var old_y = y;
+    y += vspeed;
+
+    if (place_meeting(x, y, Obj_Ground))
     {
+        y = old_y;
         vspeed = 0;
     }
-
-    if (point_distance(x, y, mouse_x, mouse_y) < 5)
-    {
-        moving = false;
-        speed = 0;
-    }
 }
-
-
-
-     if mouse_x < x  {image_xscale = -1; }
-     if mouse_x > x  {image_xscale = 1;  }
-
-/*
-if (invincible)
+else
 {
-    invincible_time -= 1;
+    hspeed = 0;
+    vspeed = 0;
 
-    if (invincible_time <= 0)
-    {
-        invincible = false;
-        invincible_time = 0;
-    }
+    if (point_distance(x, y, target_x, target_y) <= 2)
+        moving = false;
 }
 
+// Face the mouse.
+if (mouse_x < x)
+    image_xscale = -1;
+else if (mouse_x > x)
+    image_xscale = 1;
 
+// Keep the health / animation / net logic below this point.
 
-
-
-
-
-//if keyboard_check(vk_nokey) {friction = 0.2; moving = false;}
-
- 
-
-
-
-
-
- // eating Animation================================= ---
-
-
-if (sprite_index == Player_eating) 
-    if (image_index >= image_number - 1) {
-        sprite_index = SP_Player ; // اسم واقعی اسپرایت idle
+if (sprite_index == Player_eating)
+{
+    if (image_index >= image_number - 1)
+    {
+        sprite_index = SP_Player;
         image_index = 0;
     }
-
+}
 
 if (sprite_index == Sp_burning)
 {
@@ -83,22 +80,16 @@ if (sprite_index == Sp_burning)
     }
 }
 
-
-// Net Trap
 if (net_trapped)
 {
     net_timer--;
 
     if (net_timer <= 0)
     {
-        // آزاد شدن از تور
         net_trapped = false;
-
         sprite_index = SP_Player;
         image_index = 0;
         image_speed = 1;
-
-        // یک ثانیه تور دوباره روی Player اثر نگذارد
-        net_cooldown = room_speed * 1;
+        net_cooldown = room_speed;
     }
 }
