@@ -8,7 +8,7 @@ vspeed += pending_push_y;
 pending_push_x = 0;
 pending_push_y = 0;
 
-// Simple, stable gravity.
+// Simple gravity.
 vspeed += ball_gravity;
 
 // Limit velocity.
@@ -20,26 +20,56 @@ if (ball_speed > ball_max_speed)
     vspeed = lengthdir_y(ball_max_speed, ball_dir);
 }
 
-// Horizontal movement + wall collision.
-var old_x = x;
-x += hspeed;
+// =====================================
+// HORIZONTAL COLLISION
+// Move in small steps so the ball cannot tunnel into a wall.
+// =====================================
 
-if (place_meeting(x, y, Obj_Ground))
+var move_x = hspeed;
+var steps_x = max(1, ceil(abs(move_x)));
+var step_x = move_x / steps_x;
+var hit_x = false;
+
+for (var i = 0; i < steps_x; i++)
 {
-    x = old_x;
-    hspeed = -hspeed * ball_bounce;
+    x += step_x;
+
+    if (place_meeting(x, y, Obj_Ground))
+    {
+        x -= step_x;
+        hit_x = true;
+        break;
+    }
 }
 
-// Vertical movement + floor/ceiling collision.
-var old_y = y;
-y += vspeed;
+if (hit_x)
+    hspeed = -hspeed * ball_bounce;
 
-if (place_meeting(x, y, Obj_Ground))
+// =====================================
+// VERTICAL COLLISION
+// =====================================
+
+var move_y = vspeed;
+var steps_y = max(1, ceil(abs(move_y)));
+var step_y = move_y / steps_y;
+var hit_y = false;
+
+for (var j = 0; j < steps_y; j++)
 {
-    y = old_y;
+    y += step_y;
+
+    if (place_meeting(x, y, Obj_Ground))
+    {
+        y -= step_y;
+        hit_y = true;
+        break;
+    }
+}
+
+if (hit_y)
+{
     vspeed = -vspeed * ball_bounce;
 
-    // Stop tiny bounces instead of jittering forever.
     if (abs(vspeed) < 0.35)
         vspeed = 0;
 }
@@ -49,9 +79,7 @@ if (place_meeting(x, y, Obj_Ground))
 // =====================================
 
 if (place_meeting(x, y, Obj_Enemy) && invincible_time <= 0)
-{
     damage = true;
-}
 
 if (damage == true)
 {
