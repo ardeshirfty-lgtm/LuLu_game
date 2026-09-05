@@ -1,9 +1,8 @@
 // =====================================
-// BALL PHYSICS
+// BALL PHYSICS - NO GRAVITY
 // =====================================
 
 ball_max_speed = 8;
-ball_gravity = 0.25;
 ball_bounce = 0.8;
 
 hspeed = 0;
