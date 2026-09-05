@@ -9,14 +9,14 @@ animation_eating_timer = 0;
 state = "idle";
 timer = 0;
 
-// Movement
+// Floaty / jetpack-style movement
 moving = false;
 target_x = x;
 target_y = y;
 move_speed = 0;
-max_speed = 6;
-acceleration = 1;
-deceleration = 0.5;
+max_speed = 7;
+acceleration = 0.45;
+deceleration = 0.10;
 hspeed = 0;
 vspeed = 0;
 
