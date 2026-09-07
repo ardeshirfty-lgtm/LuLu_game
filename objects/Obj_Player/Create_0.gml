@@ -18,6 +18,10 @@ max_speed = 7;
 acceleration = 0.45;
 deceleration = 0.10;
 
+// Initialize Physics World velocity variables before Step reads them.
+phy_speed_x = 0;
+phy_speed_y = 0;
+
 // Ball push / stick behavior
 attached_ball = noone;
 ball_stick_angle = 60;
