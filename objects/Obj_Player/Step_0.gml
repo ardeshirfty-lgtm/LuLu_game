@@ -2,8 +2,8 @@
 // PLAYER MOVEMENT - PHYSICS WORLD
 // =====================================
 
-var vx = physics_get_linear_velocity_x(id);
-var vy = physics_get_linear_velocity_y(id);
+var vx = phy_speed_x;
+var vy = phy_speed_y;
 
 if (mouse_check_button(mb_left))
 {
@@ -43,13 +43,50 @@ else
 }
 
 // Physics World handles collision resolution with the ground.
-physics_set_linear_velocity(id, vx, vy);
+phy_speed_x = vx;
+phy_speed_y = vy;
 
 move_speed = point_distance(0, 0, vx, vy);
 
 // Stop tiny residual drift.
 if (abs(vx) < 0.02 && abs(vy) < 0.02)
-    physics_set_linear_velocity(id, 0, 0);
+{
+    phy_speed_x = 0;
+    phy_speed_y = 0;
+}
+
+// =====================================
+// BALL ATTACHMENT
+// =====================================
+
+if (attached_ball != noone)
+{
+    if (!instance_exists(attached_ball))
+    {
+        attached_ball = noone;
+    }
+    else if (!mouse_check_button(mb_left))
+    {
+        attached_ball = noone;
+    }
+    else
+    {
+        var mouse_dir = point_direction(x, y, mouse_x, mouse_y);
+        var player_dir = point_direction(0, 0, phy_speed_x, phy_speed_y);
+        var dir_difference = abs(angle_difference(mouse_dir, player_dir));
+
+        // A strong change of direction breaks the attachment.
+        if (dir_difference > ball_stick_angle)
+        {
+            attached_ball = noone;
+        }
+        else
+        {
+            attached_ball.phy_speed_x = phy_speed_x;
+            attached_ball.phy_speed_y = phy_speed_y;
+        }
+    }
+}
 
 // Face the mouse.
 if (mouse_x < x)
