@@ -32,15 +32,16 @@ else
     // Release the mouse = keep drifting, then slowly lose momentum.
     moving = false;
 
-    if (vx > 0)
-        vx = max(vx - decel, 0);
+    // Decelerate toward zero without using min/max with a negative value.
+    if (abs(vx) <= decel)
+        vx = 0;
     else
-        vx = min(vx + decel, 0);
+        vx -= sign(vx) * decel;
 
-    if (vy > 0)
-        vy = max(vy - decel, 0);
+    if (abs(vy) <= decel)
+        vy = 0;
     else
-        vy = min(vy + decel, 0);
+        vy -= sign(vy) * decel;
 }
 
 // Physics World handles collision resolution with the ground.
