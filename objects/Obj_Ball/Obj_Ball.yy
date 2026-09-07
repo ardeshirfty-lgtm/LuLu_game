@@ -23,7 +23,7 @@
   "physicsKinematic":false,
   "physicsLinearDamping":0.1,
   "physicsObject":true,
-  "physicsRestitution":0.8,
+  "physicsRestitution":0.0,
   "physicsSensor":false,
   "physicsShape":1,
   "physicsShapePoints":[],
