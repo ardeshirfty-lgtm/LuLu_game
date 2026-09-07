@@ -18,9 +18,9 @@ max_speed = 7;
 acceleration = 0.45;
 deceleration = 0.10;
 
-// Initialize Physics World velocity variables before Step reads them.
-phy_speed_x = 0;
-phy_speed_y = 0;
+// Physics World velocity variables are available after Room Creation Code.
+// Do not assign phy_speed_x / phy_speed_y here because Room Creation Code
+// runs after instance Create events.
 
 // Ball push / stick behavior
 attached_ball = noone;
