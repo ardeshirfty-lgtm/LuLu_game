@@ -4,6 +4,7 @@
 
 var vx = phy_speed_x;
 var vy = phy_speed_y;
+var decel = 0.10;
 
 if (mouse_check_button(mb_left))
 {
@@ -32,14 +33,14 @@ else
     moving = false;
 
     if (vx > 0)
-        vx = max(vx - deceleration, 0);
+        vx = max(vx - decel, 0);
     else
-        vx = min(vx + deceleration, 0);
+        vx = min(vx + decel, 0);
 
     if (vy > 0)
-        vy = max(vy - deceleration, 0);
+        vy = max(vy - decel, 0);
     else
-        vy = min(vy + deceleration, 0);
+        vy = min(vy + decel, 0);
 }
 
 // Physics World handles collision resolution with the ground.
