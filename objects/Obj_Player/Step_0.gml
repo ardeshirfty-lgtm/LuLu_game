@@ -61,31 +61,37 @@ if (abs(vx) < 0.02 && abs(vy) < 0.02)
 // BALL ATTACHMENT
 // =====================================
 
+if (attached_ball == noone)
+{
+    var nearby_ball = instance_nearest(x, y, Obj_Ball);
+
+    if (nearby_ball != noone && point_distance(x, y, nearby_ball.x, nearby_ball.y) <= 50)
+        attached_ball = nearby_ball;
+}
+
 if (attached_ball != noone)
 {
     if (!instance_exists(attached_ball))
     {
         attached_ball = noone;
     }
-    else if (!mouse_check_button(mb_left))
-    {
-        attached_ball = noone;
-    }
     else
     {
-        var mouse_dir = point_direction(x, y, mouse_x, mouse_y);
-        var player_dir = point_direction(0, 0, phy_speed_x, phy_speed_y);
-        var dir_difference = abs(angle_difference(mouse_dir, player_dir));
+        var ball_dir = point_direction(x, y, attached_ball.x, attached_ball.y);
+        var push_x = lengthdir_x(1, ball_dir);
+        var push_y = lengthdir_y(1, ball_dir);
+        var push_amount = vx * push_x + vy * push_y;
 
-        // A strong change of direction breaks the attachment.
-        if (dir_difference > ball_stick_angle)
+        // Moving away from the ball breaks the grab. Never pull the ball.
+        if (push_amount <= 0)
         {
             attached_ball = noone;
         }
         else
         {
-            attached_ball.phy_speed_x = phy_speed_x;
-            attached_ball.phy_speed_y = phy_speed_y;
+            // Only transfer outward force to the ball.
+            attached_ball.phy_speed_x += push_x * push_amount * 0.08;
+            attached_ball.phy_speed_y += push_y * push_amount * 0.08;
         }
     }
 }
