@@ -10,10 +10,7 @@
   "managed":true,
   "name":"Obj_Ball",
   "overriddenProperties":[],
-  "parent":{
-    "name":"LuLu_game",
-    "path":"LuLu_game.yyp",
-  },
+  "parent":{"name":"LuLu_game","path":"LuLu_game.yyp",},
   "parentObjectId":null,
   "persistent":false,
   "physicsAngularDamping":0.1,
@@ -22,7 +19,7 @@
   "physicsGroup":1,
   "physicsKinematic":false,
   "physicsLinearDamping":0.1,
-  "physicsObject":true,
+  "physicsObject":false,
   "physicsRestitution":0.0,
   "physicsSensor":false,
   "physicsShape":1,
@@ -32,10 +29,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":true,
-  "spriteId":{
-    "name":"Sp_ball",
-    "path":"sprites/Sp_ball/Sp_ball.yy",
-  },
+  "spriteId":{"name":"Sp_ball","path":"sprites/Sp_ball/Sp_ball.yy",},
   "spriteMaskId":null,
   "visible":true,
 }
