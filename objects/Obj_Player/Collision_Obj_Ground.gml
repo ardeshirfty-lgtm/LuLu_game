@@ -1,2 +1,2 @@
-// Physics World handles Player/Ground collision resolution.
-// No manual position or velocity correction is needed here.
+// Ground collision is handled manually in Obj_Player Step.
+// No Physics World logic is needed here.
