@@ -9,7 +9,7 @@ animation_eating_timer = 0;
 state = "idle";
 timer = 0;
 
-// Floaty / jetpack-style movement (Physics World)
+// Floaty mouse movement - NO Physics World
 moving = false;
 target_x = x;
 target_y = y;
@@ -18,11 +18,11 @@ max_speed = 7;
 acceleration = 0.45;
 deceleration = 0.10;
 
-// Physics World velocity variables are available after Room Creation Code.
-// Do not assign phy_speed_x / phy_speed_y here because Room Creation Code
-// runs after instance Create events.
+// Normal movement velocity
+move_vx = 0;
+move_vy = 0;
 
-// Ball push / stick behavior
+// Ball grab / attachment
 attached_ball = noone;
 ball_stick_angle = 60;
 
